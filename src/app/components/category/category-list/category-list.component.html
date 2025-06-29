@@ -1,0 +1,33 @@
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            @if (areActionsAvailable) {
+                <th class="text-center">Actions</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+            @for (category of pCategoryList; track category.id) {
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    @if (areActionsAvailable) {
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-primary me-2" (click)="callUpdateModalMethod.emit(category)">Edit</button>
+                            <button class="btn btn-sm btn-danger" (click)="callDeleteMethod.emit(category)">Delete</button>
+                        </td>
+                    }
+                </tr>
+            } @empty {
+                <tr>
+                    <td [attr.colspan]="areActionsAvailable ? 4 : 3" class="text-center">No categories found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
