@@ -65,7 +65,6 @@ export class CategoriesComponent implements OnInit {
     }
 
     deleteCategory(category: ICategory): void {
-        // Aquí se podría implementar una confirmación
         this.categoryService.delete(category);
     }
 
