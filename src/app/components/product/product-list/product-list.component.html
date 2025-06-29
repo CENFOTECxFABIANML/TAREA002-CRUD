@@ -1,0 +1,37 @@
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Category</th>
+            @if (areActionsAvailable) {
+                <th class="text-center">Actions</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+            @for (product of pProductList; track product.id) {
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price | currency:'$' }}</td> <td>{{ product.stock }}</td>
+                    <td>{{ product.category.name }}</td> @if (areActionsAvailable) {
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-primary me-2" (click)="callUpdateModalMethod.emit(product)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="callDeleteMethod.emit(product)">Delete</button>
+                    </td>
+                }
+                </tr>
+            } @empty {
+                <tr>
+                    <td [attr.colspan]="areActionsAvailable ? 7 : 6" class="text-center">No products found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

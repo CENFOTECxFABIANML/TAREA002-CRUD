@@ -1,0 +1,55 @@
+<form [formGroup]="form" class="row mb-4 border p-3 rounded bg-light">
+    <div>
+        <h2 class="mb-3">
+            {{ form.controls['id'].value ? 'Edit Product' : 'Add Product' }}
+        </h2>
+    </div>
+
+    <div class="mb-2 col-md-6">
+        <label class="form-label" for="name">Name*</label>
+        <input id="name" formControlName="name" type="text" class="form-control">
+        @if (form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)) {
+            <small class="text-danger">Name is required.</small>
+        }
+    </div>
+
+    <div class="mb-2 col-md-6">
+        <label class="form-label" for="category">Category*</label>
+        <select id="category" formControlName="category" class="form-select">
+            <option [ngValue]="null" disabled>Select a category...</option>
+            @for (cat of categoryService.categories$(); track cat.id) {
+                <option [ngValue]="cat.id">{{ cat.name }}</option>
+            }
+        </select>
+        @if (form.controls['category'].invalid && (form.controls['category'].dirty || form.controls['category'].touched)) {
+            <small class="text-danger">Category is required.</small>
+        }
+    </div>
+
+    <div class="mb-2 col-12">
+        <label class="form-label" for="description">Description</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-2 col-md-6">
+        <label class="form-label" for="price">Price*</label>
+        <input id="price" formControlName="price" type="number" class="form-control">
+        @if (form.controls['price'].invalid && (form.controls['price'].dirty || form.controls['price'].touched)) {
+            <small class="text-danger">A valid price is required (e.g., > 0).</small>
+        }
+    </div>
+
+    <div class="mb-2 col-md-6">
+        <label class="form-label" for="stock">Stock*</label>
+        <input id="stock" formControlName="stock" type="number" class="form-control">
+        @if (form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)) {
+            <small class="text-danger">A valid stock is required (e.g., >= 0).</small>
+        }
+    </div>
+
+    <div class="col-12 mt-3">
+        <button (click)="callSave()" class="btn btn-primary" type="button">
+            {{ form.controls['id'].value ? 'Update Product' : 'Save Product' }}
+        </button>
+    </div>
+</form>

@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="row mb-4 border p-3 rounded bg-light">
+    <div>
+        <h2 class="mb-3">
+            {{ form.controls['id'].value ? 'Edit Category' : 'Add Category' }}
+        </h2>
+    </div>
+
+    <div class="mb-2 col-md-6">
+        <label class="form-label" for="name">Name*</label>
+        <input id="name" formControlName="name" type="text" class="form-control">
+        @if (form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)) {
+            <small class="text-danger">Name is required.</small>
+        }
+    </div>
+
+    <div class="mb-2 col-md-6">
+        <label class="form-label" for="description">Description</label>
+        <input id="description" formControlName="description" type="text" class="form-control">
+    </div>
+
+    <div class="col-12 mt-3">
+        <button (click)="callSave()" [disabled]="form.invalid" class="btn btn-primary" type="button">
+            {{ form.controls['id'].value ? 'Update Category' : 'Save Category' }}
+        </button>
+    </div>
+</form>
