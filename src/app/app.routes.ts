@@ -11,6 +11,7 @@ import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
 import {CategoriesComponent} from "./pages/categories/categories.component";
 import {ProductsComponent} from "./pages/products/products.component";
+import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 
 export const routes: Routes = [
   {
@@ -52,6 +53,19 @@ export const routes: Routes = [
             IRoleType.superAdmin
           ],
           name: 'Users',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: {
+          authorities: [
+            IRoleType.admin,
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          name: 'Dashboard',
           showInSidebar: true
         }
       },
